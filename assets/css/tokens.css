@@ -1,0 +1,41 @@
+/* CHRISTINA — Material 3 tokens
+   Seed #5E5E9F (фиолет бренда) · accent #C0476C (розовый бренда)
+   Светлая тема, база — чистый белый, нейтрали с лёгким фиолетовым подтоном (H285 C4)
+   Сгенерировано @material/material-color-utilities. Правки — только здесь. */
+
+:root {
+  --brand: #5a5aae;
+  --brand-hover: #464699;
+  --brand-pressed: #38378a;
+  --brand-ink: #130d67;
+  --brand-container: #efecff;
+  --brand-container-high: #e2dfff;
+  --on-brand-container: #262477;
+  --brand-subtle: #f8f5ff;
+  --accent: #b33d62;
+  --accent-hover: #9a294f;
+  --accent-container: #ffe8ec;
+  --on-accent-container: #6e0030;
+  --surface: #FFFFFF;
+  --surface-container-low: #fffbff;
+  --surface-container: #f9f5fa;
+  --surface-container-high: #f3eff4;
+  --surface-container-max: #ebe7ec;
+  --canvas: #fcf8fd;
+  --surface-dark: #242327;
+  --surface-dark-high: #313034;
+  --on-surface: #1c1b1f;
+  --on-surface-variant: #5a595d;
+  --on-surface-muted: #737175;
+  --on-dark: #f9f5fa;
+  --on-dark-variant: #c3c0c4;
+  --outline: #dedbe6;
+  --outline-variant: #ede9f5;
+  --outline-strong: #918f9a;
+  --success: #2E7D4F;
+  --success-container: #E4F4EA;
+  --warning: #8A5B00;
+  --warning-container: #FDF0D9;
+  --danger: #B3261E;
+  --danger-container: #FCEEEE;
+}

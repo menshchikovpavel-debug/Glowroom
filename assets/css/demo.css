@@ -1,0 +1,198 @@
+/* ==========================================================================
+   demo.css — только демо-обвязка. В боевую версию НЕ переносится.
+   Плашка AURIFER, модалка «страница вне демо», тосты, мини-корзина,
+   переключатель варианта героя.
+   ========================================================================== */
+
+body.demo-locked { overflow: hidden; }
+
+/* ------------------------------------------------------------ модалка */
+.demo-modal { position: fixed; inset: 0; z-index: 9000; display: grid; place-items: center; padding: var(--sp-5); }
+.demo-modal__scrim {
+  position: absolute; inset: 0;
+  background: rgba(28,27,31,.42);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  opacity: 0; transition: opacity .22s var(--ease);
+}
+.demo-modal.is-open .demo-modal__scrim { opacity: 1; }
+.demo-modal__card {
+  position: relative; width: min(460px, 100%);
+  background: var(--surface);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-3);
+  padding: var(--sp-10) var(--sp-8) var(--sp-8);
+  text-align: center;
+  transform: translateY(12px) scale(.97); opacity: 0;
+  transition: transform .26s var(--ease), opacity .22s var(--ease);
+}
+.demo-modal.is-open .demo-modal__card { transform: none; opacity: 1; }
+.demo-modal__x {
+  position: absolute; top: var(--sp-3); right: var(--sp-3);
+  width: 40px; height: 40px; display: grid; place-items: center;
+  border: 0; background: transparent; color: var(--on-surface-muted);
+  border-radius: var(--r-pill); cursor: pointer;
+}
+.demo-modal__x:hover { background: var(--surface-container-high); color: var(--on-surface); }
+.demo-modal__crumb {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+  font-size: var(--fs-caption); color: var(--on-surface-muted); margin-bottom: var(--sp-4);
+}
+.demo-modal__crumb span:last-child { color: var(--brand); font-weight: 700; }
+.demo-modal__title { font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.15; margin: 0 0 var(--sp-3); }
+.demo-modal__text { font-size: var(--fs-body); color: var(--on-surface-variant); margin: 0 0 var(--sp-6); }
+.demo-modal__actions .btn { min-width: 180px; }
+
+/* -------------------------------------------------------------- тосты */
+.demo-toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 9200;
+  transform: translate(-50%, 16px);
+  display: flex; align-items: center; gap: var(--sp-3);
+  max-width: min(520px, calc(100vw - 32px));
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--surface-dark); color: var(--on-dark);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-3);
+  font-size: var(--fs-caption);
+  opacity: 0; transition: opacity .22s var(--ease), transform .22s var(--ease);
+}
+.demo-toast.is-open { opacity: 1; transform: translate(-50%, 0); }
+.demo-toast__mark {
+  flex: none; padding: 3px 8px; border-radius: var(--r-xs);
+  background: rgba(255,255,255,.14); color: var(--on-dark);
+  font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* -------------------------------------------------------- мини-корзина */
+#cart-widget.popup-widget { display: none; }
+#cart-widget.popup-widget.is-open { display: block; }
+.mini-cart { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 300px; }
+.mini-cart__list { display: flex; flex-direction: column; gap: var(--sp-3); max-height: 320px; overflow: auto; }
+.mini-cart__item { display: grid; grid-template-columns: 44px 1fr auto; gap: var(--sp-3); align-items: center; }
+.mini-cart__item img, .mini-cart__ph {
+  width: 44px; height: 44px; object-fit: cover;
+  border-radius: var(--r-sm); background: var(--surface-container);
+}
+.mini-cart__meta { display: flex; flex-direction: column; min-width: 0; }
+.mini-cart__meta b { font-size: var(--fs-caption); font-weight: 700; line-height: 1.3; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.mini-cart__meta small { font-size: 11px; color: var(--on-surface-muted); }
+.mini-cart__sum { font-size: var(--fs-caption); font-weight: 800; white-space: nowrap; }
+.mini-cart__total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: var(--sp-3); border-top: 1px solid var(--outline-variant);
+  font-size: var(--fs-label);
+}
+.mini-cart__total b { font-size: 20px; font-weight: 800; }
+.mini-cart__go { width: 100%; }
+.mini-cart__empty { font-size: var(--fs-caption); color: var(--on-surface-muted); margin: 0; text-align: center; padding: var(--sp-4) 0; }
+
+/* --------------------------------------------------- плашка AURIFER */
+.demo-badge {
+  position: fixed; right: 16px; bottom: 16px; z-index: 8500;
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 8px 10px 10px;
+  background: rgba(255,255,255,.86);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid var(--outline);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-2);
+  font-size: 11px;
+  transition: opacity .2s var(--ease), transform .2s var(--ease);
+}
+.demo-badge.is-hidden { opacity: 0; transform: translateY(8px); pointer-events: none; }
+.demo-badge__row { display: flex; align-items: center; gap: 8px; }
+.demo-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); flex: none; }
+.demo-badge__txt { color: var(--on-surface-variant); font-weight: 600; white-space: nowrap; }
+.demo-badge__txt a { color: var(--on-surface); font-weight: 800; }
+.demo-badge__x {
+  width: 22px; height: 22px; padding: 0; margin-left: 2px;
+  display: grid; place-items: center;
+  border: 0; background: transparent; color: var(--on-surface-muted);
+  border-radius: 50%; cursor: pointer;
+}
+.demo-badge__x:hover { background: var(--surface-container-high); }
+.demo-badge__x .ico { width: 12px; height: 12px; }
+.demo-badge__variants { display: flex; gap: 4px; }
+.demo-badge__variants button {
+  flex: 1; padding: 5px 10px;
+  border: 1px solid var(--outline); border-radius: var(--r-xs);
+  background: transparent; color: var(--on-surface-variant);
+  font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  transition: all .18s var(--ease);
+}
+.demo-badge__variants button.is-active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+@media (max-width: 767px) {
+  .demo-badge { right: 10px; bottom: 78px; padding: 6px 8px 8px; }
+  .demo-badge__txt { font-size: 10px; }
+}
+
+/* -------------------------------------------- мобильные меню/поиск */
+@media (max-width: 991px) {
+  body:not(.demo-nav-open) #navigation { display: none; }
+  body.demo-nav-open #navigation {
+    display: block; position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--surface); border-bottom: 1px solid var(--outline);
+    box-shadow: var(--shadow-3); padding: var(--sp-4); z-index: 500;
+    max-height: 70vh; overflow: auto;
+  }
+  .header-bottom { position: relative; }
+  .menu-level-1 { flex-direction: column; gap: 0; }
+  .menu-level-1 > li { border-bottom: 1px solid var(--outline-variant); }
+  .menu-level-1 > li > a { width: 100%; justify-content: space-between; padding: var(--sp-4) var(--sp-2); }
+  .menu-level-2 { display: none !important; position: static; box-shadow: none; border: 0; padding: 0 0 var(--sp-4); }
+  .menu-level-1 > li.is-open .menu-level-2 { display: block !important; }
+}
+
+/* ?plne=1 — снимаем ограничение высоты панели, чтобы снять весь результат
+   одним скриншотом. Только для ревью, на поведение демо не влияет. */
+html[data-assist-full] .assist { place-items: start center; padding: 24px 0; }
+html[data-assist-full] .assist__panel { height: auto; max-height: none; }
+html[data-assist-full] .assist__body { overflow: visible; }
+html[data-assist-full] .aq__nav { position: static; }
+
+/* Порядок фиксированных элементов снизу: cookie-бар → кнопка ассистента → плашка Aurifer.
+   Высоту cookie-бара меряет demo.js и кладёт в --cookie-h. */
+:root { --cookie-h: 0px; }
+@media (max-width: 767px) {
+  .assist-fab { bottom: calc(16px + var(--cookie-h)); }
+  .demo-badge { bottom: calc(80px + var(--cookie-h)); }
+  .demo-badge__variants { display: none; }
+}
+
+
+/* ?hover=1 — зеркалит :hover карточки для скриншотов ревью */
+.product .p.is-hover-demo { border-color: var(--outline); box-shadow: var(--shadow-2); }
+.product .p.is-hover-demo form.pr-action { grid-template-columns: minmax(0, 96px) minmax(0, 1fr); gap: var(--sp-2); }
+.product .p.is-hover-demo form.pr-action .quantity { opacity: 1; }
+
+
+
+
+/* в оформлении заказа Shoptet подвал не выводит — повторяем это в демо */
+body.demo-no-footer #footer, body.demo-no-footer .ig-section { display: none; }
+
+/* ?menu=N — раскрыть N-ю панель мегаменю для скриншотов */
+.navigation-in > ul > li.ext.is-menu-demo > ul.menu-level-2 {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--gap-block) var(--sp-8);
+  padding: var(--sp-8) !important; top: 100% !important;
+  background: var(--surface);
+  border: 1px solid var(--outline-variant) !important; border-top: 0 !important;
+  border-radius: 0 0 var(--r-xl) var(--r-xl);
+  box-shadow: var(--shadow-3);
+}
+
+/* Шаблон вешает на #navigation position: fixed и управляет им своим скриптом.
+   В демо скрипта нет, поэтому возвращаем меню в поток — иначе выпадающая
+   панель считает ширину от «убежавшего» блока. */
+@media (min-width: 992px) {
+  #navigation { position: static !important; }
+  /* .navigation-in шаблон держит absolute (off-canvas для мобилы, на десктопе
+     этим управляет их скрипт). Без скрипта блок ужимается по содержимому,
+     а внутри него абсолютная панель меню — ширина уходила в 180 000 px. */
+  .navigation-in { position: static !important; width: 100% !important; }
+}
